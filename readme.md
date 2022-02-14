@@ -3,14 +3,27 @@
 ## Swagger: https://app.anywash.ru/swagger/
 
 
-#### Действия с автомобилями:
+### Действия с автомобилями:
 GET/cars/   -     Получить список автомобилей, закрепленных за Вашей компанией.
 
-##### cUrl:
+### Запрос:
+#### cUrl:
 curl --location --request GET 'https://app.anywash.ru/api/v2/cars/' \
 --header 'Authorization: Bearer {auth_token}'
 
-
+### Ответ:
+```json
+{
+    "count": 986,                                           //Общее количество автомобилей, закрепленных за компанией
+    "next": "https://app.anywash.ru/api/v2/cars/?page=2",   //Эндпоинт следующей страницы
+    "previous": null,                                       //Эндпоинт предыдущей страницы
+    "results": [
+        {
+            "plate_number": "string"                        //ГРЗ автомобиля
+        }
+    ]
+}
+```
 
 
 
