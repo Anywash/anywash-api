@@ -8,8 +8,10 @@ GET/cars/   -     Получить список автомобилей, закр
 
 ### Запрос:
 #### cUrl:
+```
 curl --location --request GET 'https://app.anywash.ru/api/v2/cars/' \
---header 'Authorization: Bearer {auth_token}'
+--header 'Authorization: Bearer _{auth_token}_'
+```
 
 ### Ответ:
 ```json
