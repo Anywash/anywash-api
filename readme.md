@@ -79,7 +79,7 @@ curl --location --request POST 'https://app.anywash.ru/api/v2/cars/' \
 }'
 ```
 ### Ответ:
-Строка состояния(http статус)
+Строка состояния
 
 
 
@@ -112,8 +112,14 @@ curl --location --request GET 'https://app.anywash.ru/api/v2/companies/{company_
 
 ## Действия с заказами\транзакциями:
 ### ***GET/orders/***
+Получить список всех транзакций Вашей компании.
+
 ### Запрос:
 #### cUrl:
+```
+curl --location --request GET 'https://app.anywash.ru/api/v2/orders/' \
+--header 'Authorization: Bearer {auth_token}'
+```
 ### Ответ:
 ```json
 {
@@ -122,33 +128,36 @@ curl --location --request GET 'https://app.anywash.ru/api/v2/companies/{company_
     "previous": null,
     "results": [
         {
-            "order_number": "d4c185fa-6d5a-4216-97ea-3ab2f01e0d7d",
-            "client_price": 0.0,
-            "services": [
+            "order_number": "{order_number}",       //ID заказа
+            "client_price": 0.0,                    //Общая стоимость заказа
+            "services": [                           //Массив услуг в рамках заказа
                 {
-                    "quantity": 1,
+                    "quantity": 1,                  //Количество по данной услуге
                     "service": {
-                        "id": 2,
-                        "name": "Кузов коврики",
-                        "category": "washing"
+                        "id": 2,                    //ID услуги
+                        "name": "Кузов коврики",    //Наименование услуги
+                        "category": "washing"       //Категория/тип услуги
                     },
-                    "client_price_for_one": 0.0,
-                    "wheel_size": null
+                    "client_price_for_one": 0.0,    //Стоимость за единицу услуги
+                    "wheel_size": null              //Радиус колес(для категории tires)
                 }
             ],
-            "plate_number": "C696TO899",
-            "form_factor": 2,
-            "car_class": 2,
-            "poi": {
-                "id": 13,
-                "point": null,
+            "plate_number": "C696TO899",            //ГРЗ
+            "form_factor": 2,                       //Тип кузова а/м
+            "car_class": 2,                         //Класс а/м
+            "poi": {                                
+                "id": 13,                           //ID точки
+                "point": {
+                    "lat": 55.81902894806981,       //Широта
+                    "lon": 37.513913197629236       //Долгота
+                         },
                 "company": {
-                    "id": 110,
-                    "name": "testwash"
+                    "id": 110,                      //ID компании-партнера
+                    "name": "testwash"              //Наименование компании-партнера
                 },
-                "phone": "1"
+                "phone": "88006004159"              //Контактный телефон
             },
-            "created_at": "2022-02-03T11:39:11.587062"
+            "created_at": "2022-02-03T11:39:11.587062"  //Дата и время подтверждения транзакции
         }
 }
 ```
