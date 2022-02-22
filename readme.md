@@ -154,6 +154,7 @@ curl --location --request GET 'https://app.anywash.ru/api/v2/orders/' \
             "created_at": "2022-02-03T11:39:11.587062"  //Дата и время подтверждения транзакции
         }
 }
+
 ```
 ### ***POST/orders/***
 // Для компаний-партнеров. Отправить заказ на подтверждение.
@@ -379,7 +380,7 @@ curl --location --request GET 'https://app.anywash.ru/api/v2/pois/13/' \
 ```
 
 ### ***POST/pois/***
-Создать ТОУ в системе Anywash, в ответ получить ее ID.
+//Для партнеров. Создать ТОУ в системе Anywash, в ответ получить ее ID.
 ### Запрос:
 #### cUrl:
 ```
@@ -387,26 +388,38 @@ curl --location --request POST 'https://app.anywash.ru/api/v2/pois/' \
 --header 'Authorization: Bearer {auth_token}' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-  "name": "Москва, ул. Даниловский Вал, д. 13А",        //Наименование точки
-  "info": "2 поста",                                    //Поле информации о точке
-  "phone": "88006004159",                               //Телефон поддержки Anywash
-  "opening_hours": "08:00",                             //Часы открытия
-  "closing_hours": "22:00",                             //Часы закрытия
-  "post_height": 2.5,                                   //Высота поста
-  "advance_registration": "required",                   //Параметр наобходимости предварительной записи (required, possible, no)
-  "services": [                                         //Список услуг, доступных на ТОУ
-    {
-      "id" : 1,                                         //ID услуги
-      "name": "Техническая мойка",                      //Наименование услуги
-      "category": "washing"                             //Категория услуги
-    }
-  ]
+  "name": "тест",                                       //Наименование точки
+  "info": "инфо",                                       //Информационное поле
+  "phone": "88006004159",                               //Телефон тех. поддержки Anywash
+  "address": "г Санкт-Петербург, Почтамтский пер, д 2", //Адрес
+  "opening_hours": "10:00",                             //Время открытия
+  "closing_hours": "23:00",                             //Время закрытия
+  "post_height": 4.5,                                   //Высота поста
+  "advance_registration": "required",                   //Параметр предварительной записи(required, possible, no)
+  "services": [9]                                       //Набор услуг, доступных на ТОУ(ID услуг)        
 }'
 ```
 ### Ответ:
-
-
-
+```json
+{
+    "id": 636,                                              //ID новой точки
+    "name": "тест",
+    "info": "инфо",
+    "address": "г Санкт-Петербург, Почтамтский пер, д 2",
+    "phone": "88006004159",
+    "opening_hours": "10:00:00",
+    "closing_hours": "23:00:00",
+    "post_height": 4.5,
+    "advance_registration": "required",
+    "services": [
+        9
+    ],
+    "point": {
+        "lat": 59.932908,
+        "lon": 30.3014771
+    }
+}
+```
 
 ### ***GET/tickets/***
 Получить список заявок на тех. поддержку.
